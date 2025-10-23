@@ -62,6 +62,14 @@ export default function App() {
       setFlowStep(3);
       
       addLog('Backend verificando conexión con PostgreSQL en Render...', 'process');
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Pequeña pausa para visualizar el proceso
+      
+      if (response.ok) {
+        addLog('✓ Conexión exitosa con PostgreSQL en Render', 'success');
+        addLog('✓ Validación de arquitectura completada', 'success');
+      } else {
+        addLog('✗ Error al conectar con PostgreSQL en Render', 'error');
+      }
 
       setSnackbar({
         open: true,
@@ -69,6 +77,7 @@ export default function App() {
         severity: response.ok ? 'success' : 'error'
       });
     } catch (error) {
+      addLog('✗ Error de conexión con el servidor', 'error');
       setSnackbar({
         open: true,
         message: 'Error de conexión con el servidor',
@@ -96,7 +105,7 @@ export default function App() {
             gutterBottom
             sx={{ 
               color: '#ffffff',
-              textShadow: '0 0 10px rgba(255,255,255,0.3)',
+              textShadow: '0 0 15px rgba(255,255,255,0.4), 0 0 30px rgba(255,255,255,0.2)',
               fontWeight: 'bold'
             }}
           >
@@ -177,7 +186,7 @@ export default function App() {
           border: '1px solid #333'
         }}>
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-            <Terminal sx={{ color: '#666', mr: 1, fontSize: 20 }} />
+            <Terminal sx={{               color: '#999', mr: 1, fontSize: 20 }} />
             <Typography variant="caption" color="text.secondary">
               Console Output
             </Typography>
@@ -188,9 +197,9 @@ export default function App() {
               variant="caption"
               sx={{
                 display: 'block',
-                color: log.type === 'error' ? '#ff5252' : 
-                       log.type === 'success' ? '#69f0ae' : 
-                       log.type === 'process' ? '#64b5f6' : '#fff',
+                color: log.type === 'error' ? '#ff4d4d' : 
+                       log.type === 'success' ? '#ffffff' : 
+                       log.type === 'process' ? '#cccccc' : '#999999',
                 fontFamily: 'monospace',
                 fontSize: '0.75rem',
                 mb: 0.5
@@ -225,13 +234,14 @@ export default function App() {
               px: 4,
               py: 1.5,
               borderRadius: 2,
-              background: 'linear-gradient(45deg, #404040 30%, #1a1a1a 90%)',
+              background: 'linear-gradient(45deg, #ffffff 30%, #cccccc 90%)',
+              color: '#000000',
               '&:hover': {
-                background: 'linear-gradient(45deg, #1a1a1a 30%, #404040 90%)',
+                background: 'linear-gradient(45deg, #cccccc 30%, #ffffff 90%)',
               }
             }}
           >
-            {isLoading ? 'Verificando...' : 'Probar Conexión'}
+            {isLoading ? 'Verificando...' : 'Probar conexión'}
           </Button>
         </Box>
 
@@ -252,7 +262,7 @@ export default function App() {
               left: '10%',
               right: '10%',
               height: '2px',
-              background: 'linear-gradient(90deg, #333333 30%, #1a1a1a 90%)',
+              background: 'linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%)',
               zIndex: 0,
             }
           }}>
@@ -296,12 +306,12 @@ export default function App() {
                 Express.js
               </Typography>
               <Typography variant="caption" sx={{ color: '#666', fontSize: '0.7rem' }}>
-                API REST
+                API REST en Render
               </Typography>
             </Paper>
 
             <Box sx={{ zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <ArrowForward sx={{ color: '#00e5ff' }} />
+              <ArrowForward sx={{ color: '#ffffff' }} />
               <Typography variant="caption" color="text.secondary">
                 Conexión Interna
               </Typography>
