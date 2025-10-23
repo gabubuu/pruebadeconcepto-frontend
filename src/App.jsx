@@ -18,12 +18,15 @@ import {
   Computer,
   ArrowForward,
   Security,
-  Code
+  Code,
+  Terminal,
+  DataObject
 } from '@mui/icons-material';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [flowStep, setFlowStep] = useState(0);
+  const [logs, setLogs] = useState([]);
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
@@ -34,16 +37,31 @@ export default function App() {
     setSnackbar({ ...snackbar, open: false });
   };
 
+  const addLog = (message, type = 'info') => {
+    setLogs(prev => [...prev, { timestamp: new Date().toLocaleTimeString(), message, type }]);
+  };
+
   const testBackendConnection = async () => {
     setIsLoading(true);
-    setFlowStep(1); // Iniciando conexión
+    setFlowStep(1);
+    setLogs([]); // Limpiar logs anteriores
+    
     try {
+      addLog('Iniciando prueba de conexión desde React + Vite Frontend', 'info');
       const backendUrl = 'https://proyecto-backend-36oi.onrender.com';
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simular delay para ver la animación
-      setFlowStep(2); // Conectando con el backend
+      
+      addLog('Preparando llamada API a Express.js Backend en Render', 'info');
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setFlowStep(2);
+      
+      addLog('Ejecutando fetch a endpoint /api/health...', 'process');
       const response = await fetch(`${backendUrl}/api/health`);
       const data = await response.json();
-      setFlowStep(3); // Conexión con la base de datos
+      
+      addLog('Respuesta recibida del backend', 'success');
+      setFlowStep(3);
+      
+      addLog('Backend verificando conexión con PostgreSQL en Render...', 'process');
 
       setSnackbar({
         open: true,
@@ -82,7 +100,7 @@ export default function App() {
               fontWeight: 'bold'
             }}
           >
-            Validación de Arquitectura
+            Validación de arquitectura
           </Typography>
           <Typography variant="h6" color="text.secondary" paragraph>
             Prueba de concepto - Comunicación Frontend/Backend
@@ -102,6 +120,9 @@ export default function App() {
             >
               <Computer sx={{ fontSize: 40, color: flowStep >= 1 ? '#ffffff' : '#333333' }} />
               <Typography variant="body2" color={flowStep >= 1 ? 'primary' : 'text.secondary'}>
+                React + Vite
+              </Typography>
+              <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
                 Frontend
               </Typography>
             </Paper>
@@ -118,6 +139,9 @@ export default function App() {
             >
               <Cloud sx={{ fontSize: 40, color: flowStep >= 2 ? '#ffffff' : '#333333' }} />
               <Typography variant="body2" color={flowStep >= 2 ? 'primary' : 'text.secondary'}>
+                Express.js
+              </Typography>
+              <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
                 Backend
               </Typography>
             </Paper>
@@ -134,10 +158,52 @@ export default function App() {
             >
               <Storage sx={{ fontSize: 40, color: flowStep >= 3 ? '#ffffff' : '#333333' }} />
               <Typography variant="body2" color={flowStep >= 3 ? 'primary' : 'text.secondary'}>
+                PostgreSQL
+              </Typography>
+              <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
                 Base de Datos
               </Typography>
             </Paper>
           </Fade>
+        </Box>
+
+        <Box sx={{ 
+          mt: 4, 
+          p: 2, 
+          background: '#111',
+          borderRadius: 1,
+          maxHeight: '200px',
+          overflowY: 'auto',
+          border: '1px solid #333'
+        }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+            <Terminal sx={{ color: '#666', mr: 1, fontSize: 20 }} />
+            <Typography variant="caption" color="text.secondary">
+              Console Output
+            </Typography>
+          </Box>
+          {logs.map((log, index) => (
+            <Typography
+              key={index}
+              variant="caption"
+              sx={{
+                display: 'block',
+                color: log.type === 'error' ? '#ff5252' : 
+                       log.type === 'success' ? '#69f0ae' : 
+                       log.type === 'process' ? '#64b5f6' : '#fff',
+                fontFamily: 'monospace',
+                fontSize: '0.75rem',
+                mb: 0.5
+              }}
+            >
+              <span style={{ color: '#666' }}>[{log.timestamp}]</span> {log.message}
+            </Typography>
+          ))}
+          {logs.length === 0 && (
+            <Typography variant="caption" sx={{ color: '#666', fontFamily: 'monospace' }}>
+              Waiting for connection test...
+            </Typography>
+          )}
         </Box>
 
         {isLoading && (
@@ -201,8 +267,11 @@ export default function App() {
               border: '1px solid #333'
             }}>
               <Code sx={{ color: '#666', mb: 1 }} />
-              <Typography variant="caption" color="primary">
-                Frontend en Vercel
+              <Typography variant="caption" color="primary" sx={{ textAlign: 'center' }}>
+                React + Vite
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#666', fontSize: '0.7rem' }}>
+                en Vercel
               </Typography>
             </Paper>
 
@@ -222,9 +291,12 @@ export default function App() {
               alignItems: 'center',
               minWidth: '120px'
             }}>
-              <Security sx={{ color: '#666', mb: 1 }} />
-              <Typography variant="caption" color="primary">
-                SSL/TLS
+              <DataObject sx={{ color: '#666', mb: 1 }} />
+              <Typography variant="caption" color="primary" sx={{ textAlign: 'center' }}>
+                Express.js
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#666', fontSize: '0.7rem' }}>
+                API REST
               </Typography>
             </Paper>
 
@@ -244,9 +316,12 @@ export default function App() {
               alignItems: 'center',
               minWidth: '120px'
             }}>
-              <Cloud sx={{ color: '#666', mb: 1 }} />
-              <Typography variant="caption" color="primary">
-                Backend en Render
+              <Storage sx={{ color: '#666', mb: 1 }} />
+              <Typography variant="caption" color="primary" sx={{ textAlign: 'center' }}>
+                PostgreSQL
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#666', fontSize: '0.7rem' }}>
+                en Render
               </Typography>
             </Paper>
           </Box>
