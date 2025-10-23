@@ -5,13 +5,17 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
+    outDir: 'dist',
     rollupOptions: {
-      external: ['@emotion/react', '@emotion/styled'],
       output: {
         manualChunks: {
-          chakra: ['@chakra-ui/react'],
+          vendor: ['react', 'react-dom'],
+          mui: ['@mui/material', '@mui/icons-material'],
         },
       },
     },
+  },
+  optimizeDeps: {
+    include: ['@mui/material', '@mui/icons-material'],
   },
 })
