@@ -6,12 +6,12 @@ import {
   Heading,
   Button,
   Text,
-  useToast,
   Container,
   Alert,
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  useToast as useChakraToast,
 } from '@chakra-ui/react';
 import './App.css';
 
@@ -19,7 +19,7 @@ function App() {
   const [status, setStatus] = useState(null);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const toast = useToast();
+  const toast = useChakraToast();
 
   const testBackendConnection = async () => {
     setIsLoading(true);
