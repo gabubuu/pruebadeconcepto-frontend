@@ -9,12 +9,19 @@ import '@fontsource/roboto/700.css'
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
-      main: '#1976d2',
+      main: '#00ff9d',
+    },
+    secondary: {
+      main: '#ff004d',
+    },
+    background: {
+      default: '#0a0a0a',
+      paper: '#1a1a1a',
     },
   },
-})
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
