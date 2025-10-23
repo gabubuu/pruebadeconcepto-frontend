@@ -13,7 +13,7 @@ import {
   AlertDescription,
   useToast,
 } from '@chakra-ui/react';
-import './App.css';
+// Eliminamos la importación de CSS para evitar conflictos con Chakra UI
 
 function App() {
   const [status, setStatus] = useState(null);
@@ -66,11 +66,10 @@ function App() {
   };
 
   return (
-    <ChakraProvider>
-      <Container maxW="container.md" py={10}>
-        <VStack spacing={8}>
-          <Box textAlign="center">
-            <Heading mb={6}>Validación de Arquitectura Distribuida</Heading>
+    <Container maxW="container.md" py={10}>
+      <VStack spacing={8}>
+        <Box textAlign="center">
+          <Heading mb={6}>Validación de Arquitectura Distribuida</Heading>
             <Text fontSize="lg" color="gray.600" mb={8}>
               Esta prueba de concepto demuestra la comunicación entre el frontend y el backend
             </Text>
@@ -108,7 +107,6 @@ function App() {
           )}
         </VStack>
       </Container>
-    </ChakraProvider>
   );
 }
 
