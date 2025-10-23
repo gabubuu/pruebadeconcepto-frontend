@@ -48,7 +48,7 @@ export default function App() {
     
     try {
       addLog('Iniciando prueba de conexión desde React + Vite Frontend', 'info');
-      const backendUrl = 'https://proyecto-backend-36oi.onrender.com';
+      const backendUrl = 'https://proyecto-backend-priv.onrender.com';
       
       addLog('Preparando llamada API a Express.js Backend en Render', 'info');
       await new Promise(resolve => setTimeout(resolve, 1000));
