@@ -11,7 +11,15 @@ import {
   Fade,
   LinearProgress
 } from '@mui/material';
-import { NetworkCheck, Storage, Cloud, Computer } from '@mui/icons-material';
+import { 
+  NetworkCheck, 
+  Storage, 
+  Cloud, 
+  Computer,
+  ArrowForward,
+  Security,
+  Code
+} from '@mui/icons-material';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -69,11 +77,8 @@ export default function App() {
             component="h1" 
             gutterBottom
             sx={{ 
-              background: 'linear-gradient(45deg, #00ff9d 30%, #00e5ff 90%)',
-              backgroundClip: 'text',
-              textFillColor: 'transparent',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              color: '#ffffff',
+              textShadow: '0 0 10px rgba(255,255,255,0.3)',
               fontWeight: 'bold'
             }}
           >
@@ -95,7 +100,7 @@ export default function App() {
                 transition: 'all 0.3s ease'
               }}
             >
-              <Computer sx={{ fontSize: 40, color: flowStep >= 1 ? '#00ff9d' : 'grey.500' }} />
+              <Computer sx={{ fontSize: 40, color: flowStep >= 1 ? '#ffffff' : '#333333' }} />
               <Typography variant="body2" color={flowStep >= 1 ? 'primary' : 'text.secondary'}>
                 Frontend
               </Typography>
@@ -111,7 +116,7 @@ export default function App() {
                 background: flowStep >= 2 ? 'linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%)' : 'inherit'
               }}
             >
-              <Cloud sx={{ fontSize: 40, color: flowStep >= 2 ? '#00ff9d' : 'grey.500' }} />
+              <Cloud sx={{ fontSize: 40, color: flowStep >= 2 ? '#ffffff' : '#333333' }} />
               <Typography variant="body2" color={flowStep >= 2 ? 'primary' : 'text.secondary'}>
                 Backend
               </Typography>
@@ -127,7 +132,7 @@ export default function App() {
                 background: flowStep >= 3 ? 'linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%)' : 'inherit'
               }}
             >
-              <Storage sx={{ fontSize: 40, color: flowStep >= 3 ? '#00ff9d' : 'grey.500' }} />
+              <Storage sx={{ fontSize: 40, color: flowStep >= 3 ? '#ffffff' : '#333333' }} />
               <Typography variant="body2" color={flowStep >= 3 ? 'primary' : 'text.secondary'}>
                 Base de Datos
               </Typography>
@@ -154,14 +159,97 @@ export default function App() {
               px: 4,
               py: 1.5,
               borderRadius: 2,
-              background: 'linear-gradient(45deg, #00ff9d 30%, #00e5ff 90%)',
+              background: 'linear-gradient(45deg, #404040 30%, #1a1a1a 90%)',
               '&:hover': {
-                background: 'linear-gradient(45deg, #00e5ff 30%, #00ff9d 90%)',
+                background: 'linear-gradient(45deg, #1a1a1a 30%, #404040 90%)',
               }
             }}
           >
             {isLoading ? 'Verificando...' : 'Probar Conexión'}
           </Button>
+        </Box>
+
+        <Box sx={{ mt: 6, px: 2 }}>
+          <Typography variant="h6" color="text.secondary" gutterBottom sx={{ mb: 3 }}>
+            Recorrido de la Petición
+          </Typography>
+          
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between',
+            position: 'relative',
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              top: '50%',
+              left: '10%',
+              right: '10%',
+              height: '2px',
+              background: 'linear-gradient(90deg, #333333 30%, #1a1a1a 90%)',
+              zIndex: 0,
+            }
+          }}>
+            <Paper sx={{ 
+              p: 2, 
+              zIndex: 1, 
+              background: 'linear-gradient(145deg, #2a2a2a 0%, #121212 100%)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              minWidth: '120px',
+              border: '1px solid #333'
+            }}>
+              <Code sx={{ color: '#666', mb: 1 }} />
+              <Typography variant="caption" color="primary">
+                Frontend en Vercel
+              </Typography>
+            </Paper>
+
+            <Box sx={{ zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <ArrowForward sx={{ color: '#404040' }} />
+              <Typography variant="caption" color="text.secondary">
+                API Call
+              </Typography>
+            </Box>
+
+            <Paper sx={{ 
+              p: 2, 
+              zIndex: 1, 
+              background: 'linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              minWidth: '120px'
+            }}>
+              <Security sx={{ color: '#666', mb: 1 }} />
+              <Typography variant="caption" color="primary">
+                SSL/TLS
+              </Typography>
+            </Paper>
+
+            <Box sx={{ zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <ArrowForward sx={{ color: '#00e5ff' }} />
+              <Typography variant="caption" color="text.secondary">
+                Conexión Interna
+              </Typography>
+            </Box>
+
+            <Paper sx={{ 
+              p: 2, 
+              zIndex: 1, 
+              background: 'linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              minWidth: '120px'
+            }}>
+              <Cloud sx={{ color: '#666', mb: 1 }} />
+              <Typography variant="caption" color="primary">
+                Backend en Render
+              </Typography>
+            </Paper>
+          </Box>
         </Box>
       </Paper>
 
