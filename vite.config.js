@@ -6,16 +6,21 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
+    sourcemap: true,
+    commonjsOptions: {
+      include: [/node_modules/],
+    },
     rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          mui: ['@mui/material', '@mui/icons-material'],
-        },
+      input: {
+        main: './index.html',
       },
     },
   },
+  server: {
+    port: 3000,
+    open: true,
+  },
   optimizeDeps: {
-    include: ['@mui/material', '@mui/icons-material'],
+    include: ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
   },
 })
