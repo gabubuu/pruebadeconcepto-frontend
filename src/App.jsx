@@ -11,15 +11,15 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
-  useToast as useChakraToast,
 } from '@chakra-ui/react';
+import { createStandaloneToast } from '@chakra-ui/toast';
 import './App.css';
 
 function App() {
   const [status, setStatus] = useState(null);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const toast = useChakraToast();
+  const { toast } = createStandaloneToast();
 
   const testBackendConnection = async () => {
     setIsLoading(true);
