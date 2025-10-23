@@ -128,7 +128,7 @@ export default function App() {
               }}
             >
               <Computer sx={{ 
-                fontSize: 40, 
+                fontSize: 60, 
                 color: flowStep >= 1 ? '#ffffff' : '#333333',
                 filter: flowStep >= 1 ? 'drop-shadow(0 0 8px rgba(255,255,255,0.5))' : 'none',
                 transition: 'all 0.3s ease'
@@ -146,7 +146,7 @@ export default function App() {
               }}
             >
               <Cloud sx={{ 
-                fontSize: 40, 
+                fontSize: 60, 
                 color: flowStep >= 2 ? '#ffffff' : '#333333',
                 filter: flowStep >= 2 ? 'drop-shadow(0 0 8px rgba(255,255,255,0.5))' : 'none',
                 transition: 'all 0.3s ease'
@@ -164,7 +164,7 @@ export default function App() {
               }}
             >
               <Storage sx={{ 
-                fontSize: 40, 
+                fontSize: 60, 
                 color: flowStep >= 3 ? '#ffffff' : '#333333',
                 filter: flowStep >= 3 ? 'drop-shadow(0 0 8px rgba(255,255,255,0.5))' : 'none',
                 transition: 'all 0.3s ease'
@@ -274,24 +274,17 @@ export default function App() {
               border: '1px solid #333'
             }}>
               <Code sx={{ color: '#666', mb: 1 }} />
-              <Typography variant="caption" sx={{ 
-                textAlign: 'center',
-                color: '#ffffff',
-                textShadow: '0 0 10px rgba(255,255,255,0.5)',
-                fontSize: '0.85rem',
-                fontWeight: 'bold'
-              }}>
-                React + Vite en Vercel
+              <Typography variant="caption" color="primary">
+                React + Vite
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#666', fontSize: '0.7rem' }}>
+                en Vercel
               </Typography>
             </Paper>
 
             <Box sx={{ zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <ArrowForward sx={{ color: '#404040' }} />
-              <Typography variant="caption" sx={{ 
-                color: '#ffffff',
-                textShadow: '0 0 10px rgba(255,255,255,0.5)',
-                fontSize: '0.85rem'
-              }}>
+              <Typography variant="caption" color="text.secondary">
                 API Call
               </Typography>
             </Box>
@@ -306,24 +299,17 @@ export default function App() {
               minWidth: '120px'
             }}>
               <DataObject sx={{ color: '#666', mb: 1 }} />
-              <Typography variant="caption" sx={{ 
-                textAlign: 'center',
-                color: '#ffffff',
-                textShadow: '0 0 10px rgba(255,255,255,0.5)',
-                fontSize: '0.85rem',
-                fontWeight: 'bold'
-              }}>
-                Express.js API REST en Render
+              <Typography variant="caption" color="primary">
+                Express.js
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#666', fontSize: '0.7rem' }}>
+                API REST en Render
               </Typography>
             </Paper>
 
             <Box sx={{ zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <ArrowForward sx={{ color: '#ffffff' }} />
-              <Typography variant="caption" sx={{ 
-                color: '#ffffff',
-                textShadow: '0 0 10px rgba(255,255,255,0.5)',
-                fontSize: '0.85rem'
-              }}>
+              <Typography variant="caption" color="text.secondary">
                 Conexión Interna
               </Typography>
             </Box>
@@ -338,14 +324,11 @@ export default function App() {
               minWidth: '120px'
             }}>
               <Storage sx={{ color: '#666', mb: 1 }} />
-              <Typography variant="caption" sx={{ 
-                textAlign: 'center',
-                color: '#ffffff',
-                textShadow: '0 0 12px rgba(255,255,255,0.6)',
-                fontSize: '0.85rem',
-                fontWeight: 'bold'
-              }}>
-                PostgreSQL en Render
+              <Typography variant="caption" color="primary">
+                PostgreSQL
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#666', fontSize: '0.7rem' }}>
+                en Render
               </Typography>
             </Paper>
           </Box>
