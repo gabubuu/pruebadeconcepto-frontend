@@ -1,23 +1,7 @@
 import { useState } from 'react';
-import {
-  ChakraProvider,
-  Box,
-  VStack,
-  Heading,
-  Button,
-  Text,
-  Container,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  useToast,
-} from '@chakra-ui/react';
-// Eliminamos la importación de CSS para evitar conflictos con Chakra UI
+import { Box, Button, Container, Heading, Text, useToast } from '@chakra-ui/react';
 
 function App() {
-  const [status, setStatus] = useState(null);
-  const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
@@ -28,30 +12,14 @@ function App() {
       const response = await fetch(`${backendUrl}/api/health`);
       const data = await response.json();
 
-      if (response.ok) {
-        setStatus('success');
-        setMessage(data.message || '¡Sistema conectado exitosamente!');
-        toast({
-          title: 'Conexión exitosa',
-          description: 'El sistema está funcionando correctamente',
-          status: 'success',
-          duration: 5000,
-          isClosable: true,
-        });
-      } else {
-        setStatus('error');
-        setMessage(data.message || 'Error al conectar con el sistema.');
-        toast({
-          title: 'Error de conexión',
-          description: 'No se pudo establecer conexión con el sistema',
-          status: 'error',
-          duration: 5000,
-          isClosable: true,
-        });
-      }
+      toast({
+        title: response.ok ? 'Conexión exitosa' : 'Error de conexión',
+        description: data.message || (response.ok ? 'Sistema conectado' : 'Error al conectar'),
+        status: response.ok ? 'success' : 'error',
+        duration: 5000,
+        isClosable: true,
+      });
     } catch (error) {
-      setStatus('error');
-      setMessage('Error de red o el backend no está disponible.');
       toast({
         title: 'Error de red',
         description: 'No se pudo establecer conexión con el servidor',
@@ -59,11 +27,32 @@ function App() {
         duration: 5000,
         isClosable: true,
       });
-      console.error('Error al llamar al backend:', error);
     } finally {
       setIsLoading(false);
     }
   };
+
+  return (
+    <Container maxWidth="container.md" py={10}>
+      <Box textAlign="center">
+        <Heading as="h1" size="xl" mb={6}>
+          Validación de Arquitectura
+        </Heading>
+        <Text fontSize="lg" color="gray.600" mb={8}>
+          Prueba de concepto - Comunicación Frontend/Backend
+        </Text>
+        <Button
+          colorScheme="teal"
+          size="lg"
+          onClick={testBackendConnection}
+          isLoading={isLoading}
+          loadingText="Verificando..."
+        >
+          Probar Conexión
+        </Button>
+      </Box>
+    </Container>
+  );
 
   return (
     <Container maxW="container.md" py={10}>
