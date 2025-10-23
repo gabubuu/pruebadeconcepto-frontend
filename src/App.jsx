@@ -259,7 +259,7 @@ export default function App() {
               left: '10%',
               right: '10%',
               height: '2px',
-              background: 'linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%)',
+              background: 'linear-gradient(90deg, #333333 30%, #1a1a1a 90%)',
               zIndex: 0,
             }
           }}>
@@ -283,7 +283,7 @@ export default function App() {
             </Paper>
 
             <Box sx={{ zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <ArrowForward sx={{ color: '#404040' }} />
+              <ArrowForward sx={{ color: '#666' }} />
               <Typography variant="caption" color="text.secondary">
                 API Call
               </Typography>
@@ -308,7 +308,7 @@ export default function App() {
             </Paper>
 
             <Box sx={{ zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <ArrowForward sx={{ color: '#ffffff' }} />
+              <ArrowForward sx={{ color: '#666' }} />
               <Typography variant="caption" color="text.secondary">
                 Conexión Interna
               </Typography>
